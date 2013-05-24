@@ -7,6 +7,8 @@ A rails plugin to manage batch scripts similar to migrations.
   bundle exec rails generate batch_manager:migration
   bundle exec rake db:migrate
 
+This will create a table 'schema_batches' like 'schema_migrations' to save the status of batches in database.
+
 == Configuration
 
   config.batch_manager.batch_dir = "script/batch"
