@@ -7,3 +7,4 @@ spec/dummy/
 tmp/
 *.sqlite3
 *.gem
+Gemfile.lock
