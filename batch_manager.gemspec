@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = BatchManager::VERSION
   s.authors     = ["Weihu Chen"]
   s.email       = ["cctiger36@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/cctiger36/batch_manager"
   s.summary     = "A rails plugin to manage batch scripts similar to migrations."
   s.description = "A rails plugin to manage batch scripts similar to migrations."
 
