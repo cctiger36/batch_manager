@@ -37,6 +37,16 @@ The generated batch files will have the header like:
 Add the "=Batch Manager=" to tell BatchManager to manage this batch file.
 You can also add these headers to the existing batch files.
 
+== Execute Batch
+
+  bundle exec bm_exec [options] BATCH_FILE
+
+Please use this command instead of 'rails runner' to run batch scripts.
+
+  option:
+    -f, --force
+    -w, --wet
+
 == Rake Tasks
 
   # TODO: rake batch:list
