@@ -15,7 +15,7 @@ describe BatchManager::BatchStatus do
     # =auto_run: #{auto_run}
   STR
   content.gsub!(/^( |\t)+/, '')
-  File.write(batch_file_path, content)
+  File.open(batch_file_path, "w") { |f| f << content }
   batch_status = BatchManager::BatchStatus.new(batch_file_path)
 
   describe "batch status" do
