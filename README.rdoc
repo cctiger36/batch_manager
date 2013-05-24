@@ -4,6 +4,16 @@ A rails plugin to manage batch scripts similar to migrations.
 
 == Installation
 
+Add to your Gemfile
+
+  gem 'batch_manager'
+
+and bundle
+
+  bundle
+
+initialize
+
   bundle exec rails generate batch_manager:migration
   bundle exec rake db:migrate
 
