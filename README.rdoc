@@ -21,7 +21,7 @@ You can change the default configuration in config/application.rb
 
   bundle exec rails g batch test
 
-This will generate the file 'test.rb' in the configured batch_dir with default template.
+This will generate the file 'test.rb' in the configured batch_dir with default template.<br/>
 You can look up the template in lib/generators/batch/templates, and modify it for yourself.
 
 == Batch Header
@@ -34,7 +34,7 @@ The generated batch files will have the header like:
   # =auto_run:    false
   # =group_name:  GroupName
 
-Add the "=Batch Manager=" to tell BatchManager to manage this batch file.
+Add the "=Batch Manager=" to tell BatchManager to manage this batch file.<br/>
 You can also add these headers to the existing batch files.
 
 == Execute Batch
