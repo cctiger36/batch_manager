@@ -12,8 +12,8 @@ describe Rails::Generators::BatchGenerator do
   describe 'the generated files' do
     before { run_generator %w(test) }
 
-    describe 'script/batch/test_batch.rb' do
-      subject { file('script/batch/test_batch.rb') }
+    describe 'script/batch/test.rb' do
+      subject { file('script/batch/test.rb') }
       it { should exist }
       it { should contain(/=Batch Manager=/) }
     end
