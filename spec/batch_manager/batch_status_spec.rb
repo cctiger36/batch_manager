@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe BatchManager::BatchStatus do
   batch_name = "test_batch_status"
-  batch_file_path = File.expand_path("../../../tmp/#{batch_name}.rb", __FILE__)
+  temp_dir = File.expand_path("../../../tmp", __FILE__)
+  FileUtils.mkdir_p temp_dir
+  batch_file_path = File.join(temp_dir, batch_name) + ".rb"
   created_at = Time.now.strftime "%Y-%m-%d %H:%M:%S"
   times_limit = 3
   auto_run = true
@@ -42,4 +44,6 @@ describe BatchManager::BatchStatus do
       @schema_batch.delete
     end
   end
+
+  FileUtils.rm_rf(temp_dir)
 end

@@ -1,5 +1,7 @@
 = BatchManager
 
+{<img src="https://travis-ci.org/cctiger36/batch_manager.png?branch=master" alt="Build Status" />}[https://travis-ci.org/cctiger36/batch_manager]
+
 A rails plugin to manage batch scripts similar to migrations.
 
 == Installation
