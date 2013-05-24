@@ -33,7 +33,7 @@ You can change the default configuration in config/application.rb
 
 This will generate the file 'test.rb' in the configured batch_dir with default template.
 
-You can look up the template in lib/generators/batch/templates, and modify it for yourself.
+You can find the template in lib/generators/batch/templates, and modify it for yourself.
 
 == Batch Header
 
