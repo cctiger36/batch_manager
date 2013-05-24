@@ -8,7 +8,7 @@ module BatchManager
     module OverallMethods
       def batch_path(file)
         if file.start_with?(::BatchManager.batch_dir)
-          file + ".rb"
+          file
         else
           File.join(::BatchManager.batch_dir, file) + ".rb"
         end
