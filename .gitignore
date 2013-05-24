@@ -1,0 +1,7 @@
+*.swp
+*.swo
+.bundle/
+log/*.log
+pkg/
+spec/dummy/
+tmp/

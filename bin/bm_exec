@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+
+require 'optparse'
+require 'batch_manager'
+
+options = {}
+batch_file = nil
+ARGV.clone.options do |opts|
+  opts.banner = "Usage: batch [options] file_name"
+  opts.on("-f", "--force", "Force to run") { options[:force] = true }
+  opts.on("-w", "--wet", "Wet run") { options[:wet] = true }
+  opts.order! { |o| batch_file ||= o } rescue retry
+end
+ARGV.delete(batch_file)
+
+APP_PATH = File.join('.', 'config', 'application')
+ENV["RAILS_ENV"] = options[:environment] || "development"
+require APP_PATH
+Rails.application.require_environment!
+
+BatchManager::Executor.exec(batch_file, options)

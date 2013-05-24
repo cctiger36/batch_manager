@@ -1,0 +1,45 @@
+= BatchManager
+
+A rails plugin to manage batch scripts similar to migrations.
+
+== Installation
+
+  bundle exec rails generate batch_manager:migration
+  bundle exec rake db:migrate
+
+== Configuration
+
+  config.batch_manager.batch_dir = "script/batch"
+  # TODO: config.batch_manager.save_log = true
+  # TODO: config.batch_manager.log_dir = "log/batch"
+
+You can change the default configuration in config/application.rb
+
+== Batch Generator
+
+  bundle exec rails g batch test
+
+This will generate the file 'test.rb' in the configured batch_dir with default template.
+You can look up the template in lib/generators/batch/templates, and modify it for yourself.
+
+== Batch Header
+
+The generated batch files will have the header like:
+
+  # =Batch Manager=
+  # =created_at:  <%= Time.now.strftime "%Y-%m-%d %H:%M:%S" %>
+  # =times_limit: 1
+  # =auto_run:    false
+  # =group_name:  GroupName
+
+Add the "=Batch Manager=" to tell BatchManager to manage this batch file.
+
+== Rake Tasks
+
+  # TODO: rake batch:list
+
+== TODO
+
+  Save log automatically.
+  Rake tasks to check the status.
+  Admin interface.
