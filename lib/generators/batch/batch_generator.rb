@@ -13,7 +13,7 @@ module Rails
       end
 
       def create_batch_file
-        template 'batch.rb', "#{BatchManager.batch_dir}/#{file_name}.rb"
+        template 'batch.rb', File.join(BatchManager.batch_dir, class_path, "#{file_name}.rb")
       end
     end
   end

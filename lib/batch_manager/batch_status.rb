@@ -1,10 +1,11 @@
 module BatchManager
   class BatchStatus
+    include BatchManager::Utils
     attr_accessor :name, :created_at, :times_limit, :auto_run, :group_name, :path, :managed
 
     def initialize(path)
-      @path = path
       @name = File.basename(path, ".rb")
+      @path = self.batch_path(path)
       File.open path do |f|
         f.each_line do |line|
           parse_batch_content line
@@ -25,13 +26,14 @@ module BatchManager
             s.name = @name
             s.ran_times = 1
             s.last_ran_at = Time.now
+            s.path = @path
           end
         end
       end
     end
 
     def to_s
-      # TODO
+      "#{name} #{create_at.strftime('%Y-%m-%d %H:%M:%S')} #{schema_batch.try(:ran_times)}/#{times_limit || 0}"
     end
 
     def managed?

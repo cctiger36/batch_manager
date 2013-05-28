@@ -10,10 +10,20 @@ describe Rails::Generators::BatchGenerator do
   end
 
   describe 'the generated files' do
-    before { run_generator %w(test) }
+    before { run_generator %w(test subdir/test) }
 
-    describe 'script/batch/test.rb' do
-      subject { file('script/batch/test.rb') }
+    describe 'test.rb' do
+      subject { file(File.join(BatchManager.batch_dir, 'test.rb')) }
+      it { should exist }
+      it { should contain(/=Batch Manager=/) }
+    end
+  end
+
+  describe 'the generated files in subdir' do
+    before { run_generator %w(subdir/test) }
+    
+    describe "subdir/test.rb" do
+      subject { file(File.join(BatchManager.batch_dir, 'subdir/test.rb')) }
       it { should exist }
       it { should contain(/=Batch Manager=/) }
     end

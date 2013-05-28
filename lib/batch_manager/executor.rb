@@ -3,7 +3,7 @@ module BatchManager
     include BatchManager::Utils
 
     def self.exec(batch_file, options)
-      batch_file_path = batch_path(batch_file)
+      batch_file_path = batch_full_path(batch_file)
       if File.exist?(batch_file_path)
         batch_status = BatchManager::BatchStatus.new(batch_file_path)
         if options[:force] || batch_status.can_run?

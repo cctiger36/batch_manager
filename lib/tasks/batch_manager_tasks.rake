@@ -1,6 +1,8 @@
-desc "Execute batch"
 namespace :batch do
+  desc "List all batches"
   task :list do
-    # TODO
+    Dir[BatchManager.batch_dir].each do |f|
+      puts f
+    end
   end
 end
