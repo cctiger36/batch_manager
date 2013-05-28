@@ -26,8 +26,16 @@ def temp_dir
   @temp_dir ||= File.expand_path("../../tmp", __FILE__)
 end
 
-def create_batch_file
-  
+def create_batch_file(batch_name, options = {})
+  content = "# =Batch Manager="
+  content << "\n# =created_at: #{options[:created_at].strftime("%Y-%m-%d %H:%M:%S")}" if options[:created_at]
+  content << "\n# =times_limit: #{options[:times_limit]}" if options[:times_limit]
+  content << "\n# =auto_run: #{options[:auto_run]}" if options[:auto_run]
+  content << "\n# =group_name: #{options[:group_name]}" if options[:group_name]
+  content << "\nputs 'This is #{batch_name}'"
+  file_path = File.join(temp_dir, batch_name) + ".rb"
+  File.open(file_path, "w") { |f| f << content }
+  file_path
 end
 
 RSpec.configure do |config|

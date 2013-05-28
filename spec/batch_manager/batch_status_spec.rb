@@ -3,18 +3,11 @@ require 'spec_helper'
 describe BatchManager::BatchStatus do
   before(:all) do
     @batch_name = "test_batch_status"
-    @batch_file_path = File.join(temp_dir, @batch_name) + ".rb"
-    @created_at = Time.now.strftime "%Y-%m-%d %H:%M:%S"
+    @created_at = Time.now
     @times_limit = 2
     @auto_run = true
-    content = <<-STR
-      # =Batch Manager=
-      # =created_at: #{@created_at}
-      # =times_limit: #{@times_limit}
-      # =auto_run: #{@auto_run}
-    STR
-    content.gsub!(/^( |\t)+/, '')
-    File.open(@batch_file_path, "w") { |f| f << content }
+    @group_name = "group1"
+    @batch_file_path = create_batch_file(@batch_name, created_at: @created_at, times_limit: @times_limit, auto_run: @auto_run, group_name: @group_name)
     @batch_status = BatchManager::BatchStatus.new(@batch_file_path)
   end
 
@@ -23,9 +16,10 @@ describe BatchManager::BatchStatus do
     it { subject.name.should == @batch_name }
     it { subject.path.should == @batch_file_path }
     it { subject.managed?.should be_true }
-    it { subject.created_at.strftime("%Y-%m-%d %H:%M:%S").should == @created_at }
+    it { subject.created_at.strftime("%Y-%m-%d %H:%M:%S").should == @created_at.strftime("%Y-%m-%d %H:%M:%S") }
     it { subject.times_limit.should == @times_limit }
     it { subject.auto_run.should == @auto_run }
+    it { subject.group_name.should == @group_name }
     it { subject.schema_batch.should be_nil }
     it { subject.can_run?.should be_true }
   end
