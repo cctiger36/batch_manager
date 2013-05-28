@@ -5,7 +5,7 @@ module BatchManager
     class << self
       def batches
         arr = []
-        Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).each do |f|
+        Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).sort.each do |f|
           arr << batch_name(f)
         end
         arr
@@ -13,7 +13,7 @@ module BatchManager
 
       def details
         status_array = []
-        Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).each do |f|
+        Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).sort.each do |f|
           status_array << BatchManager::BatchStatus.new(f)
         end
         status_array
