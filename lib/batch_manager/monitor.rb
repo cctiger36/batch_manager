@@ -11,8 +11,12 @@ module BatchManager
         arr
       end
 
-      def list
-        # TODO
+      def details
+        status_array = []
+        Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).each do |f|
+          status_array << BatchManager::BatchStatus.new(f)
+        end
+        status_array
       end
 
       def status(file_name)

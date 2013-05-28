@@ -63,7 +63,13 @@ Please use this command instead of 'rails runner' to run batch scripts.
 
 == Rake Tasks
 
-  # TODO: rake batch:list
+show all batches
+
+  bundle exec rake batch:list
+
+show the details of batches
+
+  bundle exec rake batch:details
 
 == TODO
 

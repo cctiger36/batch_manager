@@ -30,10 +30,6 @@ module BatchManager
       end
     end
 
-    def to_s
-      "#{name} #{create_at.strftime('%Y-%m-%d %H:%M:%S')} #{schema_batch.try(:ran_times)}/#{times_limit || 0}"
-    end
-
     def managed?
       @managed
     end
