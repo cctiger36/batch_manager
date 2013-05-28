@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe BatchManager::Monitor do
   before(:all) do
-    BatchManager.stub(:batch_dir).and_return(temp_dir)
     @batches = []
     3.times do |index|
       @batches << "batch_#{index}"
@@ -17,5 +16,6 @@ describe BatchManager::Monitor do
   end
 
   after(:all) do
+    FileUtils.rm(Dir.glob(File.join(BatchManager.batch_dir, "batch_*.rb")))
   end
 end
