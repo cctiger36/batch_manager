@@ -14,13 +14,13 @@ module BatchManager
       def details
         status_array = []
         Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).sort.each do |f|
-          status_array << BatchManager::BatchStatus.new(f)
+          status_array << self.status(f)
         end
         status_array
       end
 
       def status(file_name)
-        # TODO
+        BatchManager::BatchStatus.new(file_name)
       end
     end
   end
