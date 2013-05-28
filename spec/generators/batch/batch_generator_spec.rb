@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'generators/batch/batch_generator'
 
 describe Rails::Generators::BatchGenerator do
-  destination File.expand_path("../../../../tmp", __FILE__)
+  destination temp_dir
 
   before do
     prepare_destination

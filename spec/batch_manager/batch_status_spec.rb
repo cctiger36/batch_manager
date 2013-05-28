@@ -3,11 +3,9 @@ require 'spec_helper'
 describe BatchManager::BatchStatus do
   before(:all) do
     @batch_name = "test_batch_status"
-    @temp_dir = File.expand_path("../../../tmp", __FILE__)
-    FileUtils.mkdir_p @temp_dir
-    @batch_file_path = File.join(@temp_dir, @batch_name) + ".rb"
+    @batch_file_path = File.join(temp_dir, @batch_name) + ".rb"
     @created_at = Time.now.strftime "%Y-%m-%d %H:%M:%S"
-    @times_limit = 3
+    @times_limit = 2
     @auto_run = true
     content = <<-STR
       # =Batch Manager=
@@ -33,31 +31,56 @@ describe BatchManager::BatchStatus do
   end
 
   describe "#can_run?" do
-    before do
+    before(:each) do
       @schema_batch = BatchManager::SchemaBatch.create! do |s|
         s.name = @batch_name
-        s.ran_times = 2
       end
     end
 
     it "should be true when ran_times < times_limit" do
+      @schema_batch.update_attributes(:ran_times => 1)
       @batch_status.can_run?.should be_true
     end
 
     it "should be false when ran_times == times_limit" do
-      @schema_batch.update_attributes(:ran_times => 3)
+      @schema_batch.update_attributes(:ran_times => 2)
       @batch_status.can_run?.should be_false
     end
 
     it "should be false when ran_times > times_limit" do
-      @schema_batch.update_attributes(:ran_times => 4)
+      @schema_batch.update_attributes(:ran_times => 3)
       @batch_status.can_run?.should be_false
     end
 
-    after do
-      @schema_batch.delete
+    after(:each) { @schema_batch.delete }
+  end
+
+  describe "#update_schema" do
+    context "managed batch" do
+      it "should create schema_batch at first time invoked" do
+        expect{@batch_status.update_schema}.to change{BatchManager::SchemaBatch.where(name: @batch_status.name).count}.from(0).to(1)
+      end
+
+      it "should update schema_batch from second time invoked" do
+        expect{@batch_status.update_schema}.to_not change{BatchManager::SchemaBatch.where(name: @batch_status.name).count}.by(1)
+      end
+
+      it "should increase run_times" do
+        expect{@batch_status.update_schema}.to change{BatchManager::SchemaBatch.where(name: @batch_status.name).first.ran_times}.by(1)
+      end
+
+      after(:all) { BatchManager::SchemaBatch.delete_all }
+    end
+
+    context "not managed batch" do
+      before(:all) { @batch_status.managed = false }
+      it "should not create or update schema_batch" do
+        @batch_status.update_schema
+        BatchManager::SchemaBatch.where(name: @batch_status.name).should be_empty
+      end
+      after(:all) { @batch_status.managed = true }
     end
   end
 
-  after(:all) { FileUtils.rm_rf(@temp_dir) }
+  after(:all) { FileUtils.rm(@batch_file_path) }
 end

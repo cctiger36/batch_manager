@@ -21,3 +21,16 @@ module BatchManager
     config.batch_manager.log_dir = "log/batch"
   end
 end
+
+def temp_dir
+  @temp_dir ||= File.expand_path("../../tmp", __FILE__)
+end
+
+def create_batch_file
+  
+end
+
+RSpec.configure do |config|
+  config.before(:all) { FileUtils.mkdir_p(temp_dir) }
+  config.after(:all) { FileUtils.rm_rf(temp_dir) }
+end

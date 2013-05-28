@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'generators/batch_manager/migration/migration_generator'
 
 describe BatchManager::MigrationGenerator do
-  destination File.expand_path("../../../../../tmp", __FILE__)
+  destination temp_dir
 
   before do
     prepare_destination
