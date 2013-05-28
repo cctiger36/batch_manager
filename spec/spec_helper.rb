@@ -16,7 +16,6 @@ ActiveRecord::Base.connection.execute "DELETE FROM #{BatchManager::SchemaBatch.t
 module BatchManager
   class Application < Rails::Application
     config.encoding = "utf-8"
-    config.active_support.escape_html_entities_in_json = true
     config.batch_manager.batch_dir = "script/batch"
     config.batch_manager.save_log = true
     config.batch_manager.log_dir = "log/batch"
