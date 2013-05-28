@@ -1,11 +1,10 @@
 module BatchManager
   class BatchStatus
     include BatchManager::Utils
-    attr_accessor :name, :created_at, :times_limit, :auto_run, :group_name, :path, :managed
+    attr_accessor :name, :created_at, :times_limit, :auto_run, :group_name, :managed
 
     def initialize(path)
-      @name = File.basename(path, ".rb")
-      @path = self.batch_path(path)
+      @name = batch_name(path)
       File.open path do |f|
         f.each_line do |line|
           parse_batch_content line
@@ -26,7 +25,6 @@ module BatchManager
             s.name = @name
             s.ran_times = 1
             s.last_ran_at = Time.now
-            s.path = @path
           end
         end
       end

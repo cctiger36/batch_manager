@@ -6,7 +6,7 @@ module BatchManager
       def batches
         arr = []
         Dir.glob(File.join(BatchManager.batch_dir, "**", "*.rb")).each do |f|
-          arr << batch_path(f).sub(".rb", "")
+          arr << batch_name(f)
         end
         arr
       end

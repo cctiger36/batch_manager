@@ -6,13 +6,13 @@ module BatchManager
     end
 
     module OverallMethods
-      def batch_path(filename_or_path)
+      def batch_name(filename_or_path)
         if filename_or_path.start_with?(::BatchManager.batch_dir)
           path = filename_or_path.sub("#{::BatchManager.batch_dir}/", "")
         else
           path = filename_or_path
         end
-        path.end_with?(".rb") ? path : path + ".rb"
+        path.sub(".rb", "")
       end
 
       def batch_full_path(filename_or_path)

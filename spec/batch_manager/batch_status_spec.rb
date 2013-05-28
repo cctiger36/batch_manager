@@ -15,7 +15,6 @@ describe BatchManager::BatchStatus do
     describe "batch status" do
       subject { @batch_status }
       it { subject.name.should == @batch_name }
-      it { subject.path.should == @batch_name + ".rb" }
       it { subject.managed?.should be_true }
       it { subject.created_at.strftime("%Y-%m-%d %H:%M:%S").should == @created_at.strftime("%Y-%m-%d %H:%M:%S") }
       it { subject.times_limit.should == @times_limit }
@@ -88,8 +87,7 @@ describe BatchManager::BatchStatus do
     end
 
     subject { @batch_status }
-    it { subject.name.should == File.basename(@batch_name) }
-    it { subject.path.should == @batch_name + ".rb" }
+    it { subject.name.should == @batch_name }
 
     after(:all) { FileUtils.rm(@batch_file_path) }
   end
