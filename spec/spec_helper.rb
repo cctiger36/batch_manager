@@ -35,7 +35,7 @@ module BatchManager
     config.encoding = "utf-8"
     config.batch_manager.batch_dir = temp_dir
     config.batch_manager.save_log = true
-    config.batch_manager.log_dir = "log/batch"
+    config.batch_manager.log_dir = File.join(temp_dir, "log")
   end
 end
 

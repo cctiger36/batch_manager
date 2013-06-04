@@ -7,6 +7,12 @@ module BatchManager
       Rails.application.config.batch_manager.batch_dir
     end
 
+    def log_dir
+      path = Rails.application.config.batch_manager.log_dir
+      path = File.join(Rails.root, path) unless path.start_with?("/")
+      path
+    end
+
     def signal
       "=Batch Manager="
     end
