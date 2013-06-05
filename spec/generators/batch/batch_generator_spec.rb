@@ -15,7 +15,10 @@ describe Rails::Generators::BatchGenerator do
     describe 'test.rb' do
       subject { file(File.join(BatchManager.batch_dir, 'test.rb')) }
       it { should exist }
-      it { should contain(/=Batch Manager=/) }
+      it { should contain("=Batch Manager=") }
+      it "should use BatchManager.logger to write log" do
+        should contain("BatchManager.logger")
+      end
     end
   end
 
@@ -25,7 +28,7 @@ describe Rails::Generators::BatchGenerator do
     describe "subdir/test.rb" do
       subject { file(File.join(BatchManager.batch_dir, 'subdir/test.rb')) }
       it { should exist }
-      it { should contain(/=Batch Manager=/) }
+      it { should contain("=Batch Manager=") }
     end
   end
 end

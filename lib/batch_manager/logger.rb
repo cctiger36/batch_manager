@@ -6,21 +6,31 @@ module BatchManager
     attr_reader :log_file
     delegate :debug, :info, :warn, :error, :fatal, :add, :to => :logger
 
+    class << self
+      def log_file_path(batch_name, is_wet = false)
+        log_file_name = is_wet ? "#{batch_name}_wet" : batch_name
+        File.join(BatchManager.log_dir, log_file_name) + ".log"
+      end
+    end
+
     def initialize(batch_name, is_wet)
       @logger = Log4r::Logger.new(batch_name)
       @logger.outputters << Log4r::Outputter.stdout
       if BatchManager.save_log?
-        log_file_name = is_wet ? "#{batch_name}_wet" : batch_name
-        @log_file = log_file_path(log_file_name)
-        @logger.outputters << Log4r::FileOutputter.new(log_file_name, :filename => @log_file)
+        @log_file = prepare_log_file(batch_name, is_wet)
+        @logger.outputters << Log4r::FileOutputter.new(File.basename(@log_file, ".log"), :filename => @log_file)
       end
-      Rails.logger = self
+      BatchManager.logger = self
     end
 
-    def log_file_path(file_name)
-      file_path = File.join(BatchManager.log_dir, file_name) + ".log"
+    def prepare_log_file(batch_name, is_wet)
+      file_path = self.class.log_file_path(batch_name, is_wet)
       FileUtils.mkdir_p(File.dirname(file_path)) unless File.exist?(file_path)
       file_path
+    end
+
+    def close
+      BatchManager.logger = nil
     end
   end
 end

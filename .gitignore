@@ -8,3 +8,4 @@ tmp/
 *.sqlite3
 *.gem
 Gemfile.lock
+coverage/

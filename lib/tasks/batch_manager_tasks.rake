@@ -21,7 +21,7 @@ namespace :batch do
       else
         str << "%25s" % ""
       end
-      str << "%25s" % status.created_at.strftime('%Y-%m-%d %H:%M:%S')
+      str << "%25s" % status.created_at.strftime('%Y-%m-%d %H:%M:%S') if status.created_at
       puts str
     end
   end

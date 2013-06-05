@@ -1,0 +1,53 @@
+body {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse:collapse;
+  border-spacing:0;
+  background-color:#ffffff;
+  empty-cells:show;
+}
+
+td, th {
+  border:1px solid #663300;
+}
+
+th {
+  color:#FFF;
+  background-color:#996633;
+  background-position:left top;
+  padding:0.1em 0.5em;
+  text-align:center;
+}
+
+th a {
+  color: #FFF;
+  text-decoration: underline;;
+}
+
+td {
+  padding:0.1em 0.5em;
+}
+
+tr.odd {
+  background-color:#ffffcc;
+}
+
+tr.attention {
+  background-color:#ffaaaa;
+}
+
+tr.disable {
+  background-color:#aaaaaa;
+}
+
+tr.even.disable {
+  background-color:#bbbbbb;
+}
+
+tr.odd.disable {
+  background-color:#bbbbaa;
+}

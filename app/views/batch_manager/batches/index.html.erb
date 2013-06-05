@@ -1,0 +1,42 @@
+<h2>Batches</h2>
+<table>
+  <tr>
+    <th>Managed?</th>
+    <th>Name</th>
+    <th>Ran/Limit</th>
+    <th>Last run at</th>
+    <th>Created at</th>
+    <th>Log</th>
+    <th></th>
+  </tr>
+  <% @details.each do |status| %>
+    <% schema_batch = status.schema_batch %>
+    <tr>
+      <td><%= status.managed?? "Yes" : "" %></td>
+      <td><%= status.name %></td>
+      <td style="text-align:right;"><%= schema_batch.try(:ran_times).to_i %>/<%= status.times_limit || 0 %></td>
+      <td style="text-align:center;">
+        <% if last_ran_at = schema_batch.try(:last_ran_at) %>
+          <%= last_ran_at.strftime('%Y-%m-%d %H:%M:%S') %>
+        <% end %>
+      </td>
+      <td style="text-align:center;"><%= status.created_at.strftime('%Y-%m-%d %H:%M:%S') if status.created_at %></td>
+      <td style="text-align:center;">
+        <% if File.exist?(BatchManager::Logger.log_file_path(status.name)) %>
+          <%= link_to "dry", log_batch_manager_batches_url(:batch_name => status.name) %>
+        <% end %>
+        <% if File.exist?(BatchManager::Logger.log_file_path(status.name, true)) %>
+          <%= link_to "wet", log_batch_manager_batches_url(:batch_name => status.name, :wet => true) %>
+        <% end %>
+      </td>
+      <td style="text-align:center;">
+        <% if status.managed? %>
+          <%= link_to "dry run", exec_batch_manager_batches_url(:batch_name => status.name) %>
+          <% if status.can_run? %>
+            <%= link_to "wet run", exec_batch_manager_batches_url(:batch_name => status.name, :wet => true), :class => "danger", :onclick => "return confirm('Are you sure?')" %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

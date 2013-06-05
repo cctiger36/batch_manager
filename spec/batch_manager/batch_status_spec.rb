@@ -6,9 +6,8 @@ describe BatchManager::BatchStatus do
       @batch_name = "test_batch_status"
       @created_at = Time.now
       @times_limit = 2
-      @auto_run = true
       @group_name = "group1"
-      @batch_file_path = create_batch_file(@batch_name, created_at: @created_at, times_limit: @times_limit, auto_run: @auto_run, group_name: @group_name)
+      @batch_file_path = create_batch_file(@batch_name, created_at: @created_at, times_limit: @times_limit, group_name: @group_name)
       @batch_status = BatchManager::BatchStatus.new(@batch_file_path)
     end
 
@@ -18,7 +17,6 @@ describe BatchManager::BatchStatus do
       it { subject.managed?.should be_true }
       it { subject.created_at.strftime("%Y-%m-%d %H:%M:%S").should == @created_at.strftime("%Y-%m-%d %H:%M:%S") }
       it { subject.times_limit.should == @times_limit }
-      it { subject.auto_run.should == @auto_run }
       it { subject.group_name.should == @group_name }
       it { subject.schema_batch.should be_nil }
       it { subject.can_run?.should be_true }

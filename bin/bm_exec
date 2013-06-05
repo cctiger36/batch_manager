@@ -16,8 +16,8 @@ end
 ARGV.delete(batch_file)
 
 APP_PATH = File.join('.', 'config', 'application')
-ENV["RAILS_ENV"] = options[:environment] || "development"
 require APP_PATH
+#ENV["RAILS_ENV"] = options[:environment] || "development"
 Rails.application.require_environment!
 
 BatchManager::Executor.exec(batch_file, options)

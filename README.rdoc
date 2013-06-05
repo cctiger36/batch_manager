@@ -42,7 +42,6 @@ The generated batch files will have the header like:
   # =Batch Manager=
   # =created_at:  2013-05-24 13:10:25
   # =times_limit: 1
-  # =auto_run:    false
   # =group_name:  GroupName
 
 Add the "=Batch Manager=" to tell BatchManager to manage this batch file.
@@ -61,13 +60,19 @@ Please use this command instead of 'rails runner' to run batch scripts.
 
 == Logger
 
-Please use Rails.logger in batch scripts to output logs, and then BatchManager will automatically also output logs to the file in the configured log directory.
+Please use BatchManager.logger in batch scripts to output logs, and then BatchManager will automatically also output logs to the file in the configured log directory.
 
-  Rails.logger.debug
-  Rails.logger.info
-  Rails.logger.warn
-  Rails.logger.error
-  Rails.logger.fatal
+  BatchManager.logger.debug
+  BatchManager.logger.info
+  BatchManager.logger.warn
+  BatchManager.logger.error
+  BatchManager.logger.fatal
+
+When batches executed without BatchManager, it will write log to $stdout as default.
+
+== Web interface
+
+The web interface will at http://localhost:3000/batch_manager, you can also execute batches there.
 
 == Rake Tasks
 
@@ -78,7 +83,3 @@ show all batches
 show the details of batches
 
   bundle exec rake batch:details
-
-== TODO
-
-  Admin interface.

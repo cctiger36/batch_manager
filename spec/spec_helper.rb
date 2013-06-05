@@ -24,9 +24,8 @@ def create_batch_file(batch_name, options = {})
   content = "# =Batch Manager="
   content << "\n# =created_at: #{(options[:created_at] || Time.now).strftime("%Y-%m-%d %H:%M:%S")}"
   content << "\n# =times_limit: #{options[:times_limit]}" if options[:times_limit]
-  content << "\n# =auto_run: #{options[:auto_run]}" if options[:auto_run]
   content << "\n# =group_name: #{options[:group_name]}" if options[:group_name]
-  content << "\nRails.logger.info 'This is #{batch_name}'"
+  content << "\nBatchManager.logger.info 'This is #{batch_name}'"
   FileUtils.mkdir_p(File.join(temp_dir, File.dirname(batch_name))) if batch_name.include?("/")
   file_path = File.join(temp_dir, batch_name) + ".rb"
   File.open(file_path, "w") { |f| f << content }

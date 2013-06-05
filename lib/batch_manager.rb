@@ -1,7 +1,10 @@
+require 'rails'
 require 'active_record'
-require 'batch_manager/railtie'
+require 'batch_manager/engine'
 
 module BatchManager
+  mattr_accessor :logger
+
   class << self
     def batch_dir
       Rails.application.config.batch_manager.batch_dir
@@ -19,6 +22,10 @@ module BatchManager
 
     def signal
       "=Batch Manager="
+    end
+
+    def logger
+      @@logger ||= ::Logger.new(STDOUT)
     end
   end
 end

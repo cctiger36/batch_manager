@@ -1,7 +1,7 @@
 module BatchManager
   class BatchStatus
     include BatchManager::Utils
-    attr_accessor :name, :created_at, :times_limit, :auto_run, :group_name, :managed
+    attr_accessor :name, :created_at, :times_limit, :group_name, :managed
 
     def initialize(path)
       @name = batch_name(path)
@@ -46,8 +46,6 @@ module BatchManager
             @times_limit = line.sub(/#\s*=times_limit:/, "").strip.to_i
           elsif line.include?("=created_at:")
             @created_at = Time.parse(line.sub(/#\s*=created_at:/, "").strip)
-          elsif line.include?("=auto_run:")
-            @auto_run = line.sub(/#\s*=auto_run:/, "").strip.downcase == "true"
           elsif line.include?("=group_name:")
             @group_name = line.sub(/#\s*=group_name:/, "").strip
           end
