@@ -50,5 +50,18 @@ describe BatchManager::Executor do
 
       after(:all) { FileUtils.rm(@log_file_path) }
     end
+
+    context "when 'save_log' be false" do
+      before(:all) do
+        Rails.application.config.batch_manager.save_log = false
+        BatchManager::Executor.exec(@batch_name)
+        @log_file_path = File.join(BatchManager.log_dir, @batch_name) + ".log"
+      end
+
+      it "should not save log to log file" do
+        Rails.logger.log_file.should be_nil
+        File.exist?(@log_file_path).should be_false
+      end
+    end
   end
 end

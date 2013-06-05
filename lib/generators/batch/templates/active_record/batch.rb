@@ -11,9 +11,9 @@ ActiveRecord::Base.connection.with_standby do
   ActiveRecord::Base.transaction do
 
     if wet_run
-      p "Wet run completed!"
+      Rails.logger.info "Wet run completed!"
     else
-      p "Rolling back."
+      Rails.logger.warn "Rolling back."
       raise ActiveRecord::Rollback
     end
   end

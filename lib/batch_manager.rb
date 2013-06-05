@@ -13,6 +13,10 @@ module BatchManager
       path
     end
 
+    def save_log?
+      Rails.application.config.batch_manager.save_log
+    end
+
     def signal
       "=Batch Manager="
     end
@@ -24,3 +28,4 @@ require 'batch_manager/schema_batch'
 require 'batch_manager/batch_status'
 require 'batch_manager/executor'
 require 'batch_manager/monitor'
+require "batch_manager/logger"

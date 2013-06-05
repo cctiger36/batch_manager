@@ -9,13 +9,11 @@ module BatchManager
           batch_status = BatchManager::BatchStatus.new(batch_file_path)
           if options[:force] || batch_status.can_run?
             @wet = options[:wet]
-            origin_stdout = STDOUT.clone
-            logfile_name = @wet ? "#{batch_status.name}_wet" : batch_status.name
-            STDOUT.reopen(logfile(logfile_name))
-            puts log_header(@wet)
+            BatchManager::Logger.new(batch_status.name, @wet)
+            write_log_header(@wet)
             eval(File.read(batch_file_path))
-            STDOUT.reopen(origin_stdout)
             batch_status.update_schema
+            puts "Log saved at: #{Rails.logger.log_file}" if Rails.logger.log_file
           else
             raise "Cannot run this batch."
           end
@@ -24,17 +22,11 @@ module BatchManager
         end
       end
 
-      def logfile(file_name)
-        file_path = File.join(BatchManager.log_dir, file_name) + ".log"
-        FileUtils.mkdir_p(File.dirname(file_path)) unless File.exist?(file_path)
-        File.new(file_path, File::WRONLY | File::APPEND | File::CREAT)
-      end
-
-      def log_header(is_wet)
-        header = "=============================="
-        header << "= #{is_wet ? 'WET' : 'DRY'} RUN"
-        header << "= Ran at: #{Time.now.strftime("%Y-%m-%d %H:%M:%S")}"
-        header << "=============================="
+      def write_log_header(is_wet)
+        Rails.logger.info "=============================="
+        Rails.logger.info "= #{is_wet ? 'WET' : 'DRY'} RUN"
+        Rails.logger.info "= Ran at: #{Time.now.strftime("%Y-%m-%d %H:%M:%S")}"
+        Rails.logger.info "=============================="
       end
     end
   end

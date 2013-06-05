@@ -22,8 +22,8 @@ This will create a table 'schema_batches' like 'schema_migrations' to save the s
 == Configuration
 
   config.batch_manager.batch_dir = "script/batch"
-  # TODO: config.batch_manager.save_log = true
-  # TODO: config.batch_manager.log_dir = "log/batch"
+  config.batch_manager.save_log = true
+  config.batch_manager.log_dir = "log/batch"
 
 You can change the default configuration in config/application.rb
 
@@ -58,6 +58,16 @@ Please use this command instead of 'rails runner' to run batch scripts.
   option:
     -f, --force
     -w, --wet
+
+== Logger
+
+Please use Rails.logger in batch scripts to output logs, and then BatchManager will automatically also output logs to the file in the configured log directory.
+
+  Rails.logger.debug
+  Rails.logger.info
+  Rails.logger.warn
+  Rails.logger.error
+  Rails.logger.fatal
 
 == Rake Tasks
 
