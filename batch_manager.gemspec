@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "A rails plugin to manage batch scripts similar to migrations."
   s.description = "A rails plugin to manage batch scripts similar to migrations."
 
-  s.files       = Dir["{bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files       = Dir["{app,config,bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.bindir      = 'bin'
   s.executables = ['bm_exec']
   s.require_path = 'lib'
