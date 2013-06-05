@@ -4,6 +4,9 @@ require 'rspec/rails'
 require 'ammeter/init'
 require 'batch_manager'
 
+require 'coveralls'
+Coveralls.wear!
+
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',
   :database => File.expand_path(File.dirname(__FILE__) + '/batch_manager_test.sqlite3')
