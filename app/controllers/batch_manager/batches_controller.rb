@@ -6,7 +6,7 @@ module BatchManager
 
     def exec
       BatchManager::Executor.exec(params[:batch_name], :wet => params[:wet])
-      redirect_to(batch_manager_batches_url)
+      redirect_to(batches_url)
     end
 
     def log
