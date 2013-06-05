@@ -23,17 +23,17 @@
       <td style="text-align:center;"><%= status.created_at.strftime('%Y-%m-%d %H:%M:%S') if status.created_at %></td>
       <td style="text-align:center;">
         <% if File.exist?(BatchManager::Logger.log_file_path(status.name)) %>
-          <%= link_to "dry", log_batch_manager_batches_url(:batch_name => status.name) %>
+          <%= link_to "dry", log_batches_url(:batch_name => status.name) %>
         <% end %>
         <% if File.exist?(BatchManager::Logger.log_file_path(status.name, true)) %>
-          <%= link_to "wet", log_batch_manager_batches_url(:batch_name => status.name, :wet => true) %>
+          <%= link_to "wet", log_batches_url(:batch_name => status.name, :wet => true) %>
         <% end %>
       </td>
       <td style="text-align:center;">
         <% if status.managed? %>
-          <%= link_to "dry run", exec_batch_manager_batches_url(:batch_name => status.name) %>
+          <%= link_to "dry run", exec_batches_url(:batch_name => status.name) %>
           <% if status.can_run? %>
-            <%= link_to "wet run", exec_batch_manager_batches_url(:batch_name => status.name, :wet => true), :class => "danger", :onclick => "return confirm('Are you sure?')" %>
+            <%= link_to "wet run", exec_batches_url(:batch_name => status.name, :wet => true), :class => "danger", :onclick => "return confirm('Are you sure?')" %>
           <% end %>
         <% end %>
       </td>

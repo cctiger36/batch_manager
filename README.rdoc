@@ -72,7 +72,11 @@ When batches executed without BatchManager, it will write log to $stdout as defa
 
 == Web interface
 
-The web interface will at http://localhost:3000/batch_manager, you can also execute batches there.
+Mount the web interface in the routes file.
+
+  mount BatchManager::Engine, :at => "batch_manager"
+
+You can also use web interface to execute batches.
 
 == Rake Tasks
 
