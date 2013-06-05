@@ -1,4 +1,4 @@
-= BatchManager {<img src="https://travis-ci.org/cctiger36/batch_manager.png?branch=master" alt="Build Status" />}[https://travis-ci.org/cctiger36/batch_manager] {<img src="https://badge.fury.io/rb/batch_manager.png" alt="Gem Version" />}[http://badge.fury.io/rb/batch_manager]
+= BatchManager {<img src="https://travis-ci.org/cctiger36/batch_manager.png?branch=master" alt="Build Status" />}[https://travis-ci.org/cctiger36/batch_manager] {<img src="https://badge.fury.io/rb/batch_manager.png" alt="Gem Version" />}[http://badge.fury.io/rb/batch_manager] {<img src="https://coveralls.io/repos/cctiger36/batch_manager/badge.png?branch=master" alt="Coverage Status" />}[https://coveralls.io/r/cctiger36/batch_manager?branch=master]
 
 A rails plugin to manage batch scripts similar to migrations.
 
