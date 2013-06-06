@@ -16,7 +16,7 @@ module BatchManager
               batch_status.update_schema if @wet
             rescue => e
               logger.error e
-              raise e
+              logger.error "Failed."
             ensure
               puts "Log saved at: #{BatchManager.logger.log_file}" if logger.log_file
               logger.close
