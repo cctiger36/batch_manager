@@ -11,7 +11,7 @@ module BatchManager
 
     def log
       log_file = BatchManager::Logger.log_file_path(params[:batch_name], params[:wet])
-      render :text => File.read(log_file).gsub("\n", "<br/>")
+      render :file => log_file, :content_type => Mime::TEXT, :layout => false
     end
   end
 end
