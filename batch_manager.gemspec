@@ -10,7 +10,8 @@ Gem::Specification.new do |s|
   s.email       = ["cctiger36@gmail.com"]
   s.homepage    = "https://github.com/cctiger36/batch_manager"
   s.summary     = "A rails plugin to manage batch scripts similar to migrations."
-  s.description = "A rails plugin to manage batch scripts similar to migrations."
+  s.description = "Manage batches status. Support execute batches from web interface. Automatically save the log to file."
+  s.license     = 'MIT'
 
   s.files       = Dir["{app,config,bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.bindir      = 'bin'
