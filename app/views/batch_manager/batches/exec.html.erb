@@ -1,0 +1,22 @@
+<script>
+  function read_log() {
+    offset = $("#offset").val();
+    $.get('<%= async_read_log_batches_url(:batch_name => @batch_name, :wet => @wet) %>' + '&offset=' + offset, function(data) {
+      $("#log_box").val($("#log_box").val() + data.content);
+      $("#offset").val(data.offset);
+      scrollLogBoxDown();
+    });
+  }
+  function scrollLogBoxDown() {
+    var logBox = $('#log_box');
+    logBox.scrollTop(logBox[0].scrollHeight - logBox.height());
+  }
+  $(function() {
+    setInterval(read_log, 1000);
+  });
+</script>
+
+<h2><%= @batch_name %> <%= "WET RUN" if @wet %> Executing!<h2>
+
+<%= text_area_tag :log, nil, :id => "log_box" %>
+<%= hidden_field_tag :offset, @offset, :id => :offset %>

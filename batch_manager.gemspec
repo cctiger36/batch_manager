@@ -12,16 +12,17 @@ Gem::Specification.new do |s|
   s.summary     = "A rails plugin to manage batch scripts similar to migrations."
   s.description = "A rails plugin to manage batch scripts similar to migrations."
 
-  s.files       = Dir["{app,config,bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files       = Dir["{app,config,bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.bindir      = 'bin'
   s.executables = ['bm_exec']
   s.require_path = 'lib'
 
-  s.add_dependency "rails", ">=3.0.0"
+  s.add_dependency "rails", ">=3.1.0"
   s.add_dependency "log4r"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "ammeter"
+  s.add_development_dependency "resque"
 end

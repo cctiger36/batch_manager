@@ -6,6 +6,7 @@ BatchManager::Engine.routes.draw do
     collection do
       get :exec
       get :log
+      get :async_read_log
     end
   end
 
