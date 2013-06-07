@@ -33,15 +33,6 @@ module BatchManager
       @wet = params[:wet]
     end
 
-    def resque_supported?
-      begin
-        require 'resque'
-        defined?(Resque)
-      rescue
-        false
-      end
-    end
-
     def log_file
       20.times do
         begin
