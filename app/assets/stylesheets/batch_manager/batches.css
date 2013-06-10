@@ -56,3 +56,15 @@ tr.odd.disable {
   width: 100%;
   height:500px;
 }
+
+.resque_label {
+  text-align: right;
+}
+
+.resque_label.support {
+  color: green;
+}
+
+.resque_label.not_support {
+  color: red;
+}

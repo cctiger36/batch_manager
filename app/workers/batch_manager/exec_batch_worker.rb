@@ -6,5 +6,8 @@ module BatchManager
       BatchManager::Executor.exec(batch_name, :wet => options[:wet])
     end
 
+    def self.queue_name
+      @queue
+    end
   end
 end

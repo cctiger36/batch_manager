@@ -3,6 +3,7 @@ module BatchManager
     before_filter :retain_batch_params, :except => [:index]
 
     def index
+      @resque_supported = resque_supported?
       @details = BatchManager::Monitor.details
     end
 
