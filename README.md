@@ -82,6 +82,8 @@ You can also use web interface to execute batches.
 
 If [resque](https://github.com/resque/resque) installed in you application, the batch script can be executed asynchronous. And the log can be checked on real time in the brower.
 
+The QUEUE's name will be **"batch_manager".**
+
 ## Rake Tasks
 
 show all batches
