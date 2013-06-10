@@ -9,7 +9,7 @@ module BatchManager
     def exec
       if resque_supported?
         Resque.enqueue(BatchManager::ExecBatchWorker, @batch_name, :wet => @wet)
-        redirect_to(log_batches_url(:batch_name => @batch_name, :wet => @wet))
+        redirect_to(log_batches_url(:batch_name => @batch_name, :wet => @wet, :refresh => true))
       else
         BatchManager::Executor.exec(@batch_name, :wet => @wet)
         redirect_to(batches_url)

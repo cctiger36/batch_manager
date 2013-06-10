@@ -1,3 +1,4 @@
+<% if params[:refresh] %>
 <script>
   function read_log() {
     offset = $("#offset").val();
@@ -15,6 +16,7 @@
     setInterval(read_log, 1000);
   });
 </script>
+<% end %>
 
 <h2><%= @batch_name %><h2>
 
