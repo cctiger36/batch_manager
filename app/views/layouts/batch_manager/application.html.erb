@@ -8,7 +8,19 @@
 </head>
 <body>
 
-<%= yield %>
+  <header>
+    <div class="inner">
+      <h1>BatchManager</h1>
+    </div>
+  </header>
+
+  <div id="wrapper">
+    <%= yield %>
+  </div>
+
+  <footer>
+    <p><a href="https://github.com/cctiger36/batch_manager">BatchManager</a> VERSION <%= BatchManager::VERSION %></p>
+  </footer>
 
 </body>
 </html>

@@ -1,6 +1,10 @@
-<h2>Edit Batch</h2>
-<h3><%= @batch_name %></h3>
+<div class="group title">
+  <h2 style="float:left;">Edit Batch</h2>
+  <div class="label" style="float:left;margin-left:25px;"><%= @batch_name %></div>
+</div>
 <%= form_tag batch_url(escape_batch_name(@batch_name)), :method => :put do %>
   <%= text_area_tag :content, @content, style: "width:100%;height:500px;" %>
-  <%= submit_tag %>
+  <div style="margin-top:15px;">
+    <%= submit_tag "Save", :class => "btn info large" %>
+  </div>
 <% end %>
