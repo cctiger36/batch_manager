@@ -68,6 +68,16 @@ textarea {
   box-sizing: border-box;
 }
 
+a.cancel {
+  color: #aaa;
+  text-decoration: none;
+}
+
+a.cancel:hover {
+  color: #999;
+  text-decoration: underline;
+}
+
 footer {
   text-align: center;
   padding: 30px 0;
