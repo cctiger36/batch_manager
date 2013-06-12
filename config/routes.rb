@@ -3,10 +3,11 @@ BatchManager::Engine.routes.draw do
   root :to => "batches#index"
 
   resources :batches do
-    collection do
+    member do
       get :exec
       get :log
       get :async_read_log
+      get :remove_log
     end
   end
 

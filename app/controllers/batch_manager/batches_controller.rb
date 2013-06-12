@@ -1,10 +1,21 @@
 module BatchManager
   class BatchesController < ApplicationController
+    include BatchManager::Utils
     before_filter :retain_batch_params, :except => [:index]
+    helper_method :escape_batch_name
 
     def index
       @resque_supported = resque_supported?
       @details = BatchManager::Monitor.details
+    end
+
+    def edit
+      @content = File.read(batch_full_path(@batch_name))
+    end
+
+    def update
+      File.open(batch_full_path(@batch_name), "w") { |f| f << params[:content] }
+      redirect_to(batches_url, :notice => "#{@batch_name} updated.")
     end
 
     def exec
@@ -17,20 +28,33 @@ module BatchManager
       end
     end
 
-    def async_read_log
-      log_file.seek(params[:offset].to_i) if params[:offset].present?
-      render :json => {:content => log_file.read, :offset => log_file.size}
-    end
-
     def log
       @offset = log_file.size
       @content = log_file.read
     end
 
+    def async_read_log
+      log_file.seek(params[:offset].to_i) if params[:offset].present?
+      render :json => {:content => log_file.read, :offset => log_file.size}
+    end
+
+    def remove_log
+      FileUtils.rm(BatchManager::Logger.log_file_path(@batch_name, @wet))
+      redirect_to(batches_url, :notice => "Log removed.")
+    end
+
+    def escape_batch_name(name)
+      name.gsub("/", "|")
+    end
+
+    def unescape_batch_name(name)
+      name.gsub("|", "/")
+    end
+
     private
 
     def retain_batch_params
-      @batch_name = params[:batch_name]
+      @batch_name = unescape_batch_name(params[:id])
       @wet = params[:wet]
     end
 
@@ -40,7 +64,7 @@ module BatchManager
           @log_file ||= File.open(BatchManager::Logger.log_file_path(@batch_name, @wet), 'r')
           return @log_file
         rescue
-          sleep 3
+          sleep 2
           retry
         end
       end

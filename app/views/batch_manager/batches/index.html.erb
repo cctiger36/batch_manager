@@ -4,6 +4,12 @@
 <% else %>
   <div class="resque_label not_support">Resque or Resque worker not found</div>
 <% end %>
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<% if flash[:error] %>
+  <div class="error"><%= flash[:error] %></div>
+<% end %>
 <table>
   <tr>
     <th>Managed?</th>
@@ -28,17 +34,20 @@
       <td style="text-align:center;"><%= status.created_at.strftime('%Y-%m-%d %H:%M:%S') if status.created_at %></td>
       <td style="text-align:center;">
         <% if File.exist?(BatchManager::Logger.log_file_path(status.name)) %>
-          <%= link_to "dry", log_batches_url(:batch_name => status.name) %>
+          <%= link_to "dry", log_batch_url(escape_batch_name(status.name)) %>
+          <%= link_to "remove", remove_log_batch_url(escape_batch_name(status.name)), :onclick => "return confirm('Are you sure?')" %>
         <% end %>
         <% if File.exist?(BatchManager::Logger.log_file_path(status.name, true)) %>
-          <%= link_to "wet", log_batches_url(:batch_name => status.name, :wet => true) %>
+          <%= link_to "wet", log_batch_url(escape_batch_name(status.name), :wet => true) %>
+          <%= link_to "remove", remove_log_batch_url(escape_batch_name(status.name), :wet => true), :onclick => "return confirm('Are you sure?')" %>
         <% end %>
       </td>
       <td style="text-align:center;">
+        <%= link_to "edit", edit_batch_url(escape_batch_name(status.name)) %>
         <% if status.managed? %>
-          <%= link_to "dry run", exec_batches_url(:batch_name => status.name) %>
+          <%= link_to "dry run", exec_batch_url(escape_batch_name(status.name)) %>
           <% if status.can_run? %>
-            <%= link_to "wet run", exec_batches_url(:batch_name => status.name, :wet => true), :class => "danger", :onclick => "return confirm('Are you sure?')" %>
+            <%= link_to "wet run", exec_batch_url(escape_batch_name(status.name), :wet => true), :class => "danger", :onclick => "return confirm('Are you sure?')" %>
           <% end %>
         <% end %>
       </td>

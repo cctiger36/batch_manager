@@ -2,7 +2,7 @@
 <script>
   function read_log() {
     offset = $("#offset").val();
-    $.get('<%= async_read_log_batches_url(:batch_name => @batch_name, :wet => @wet) %>' + '&offset=' + offset, function(data) {
+    $.get('<%= async_read_log_batch_url(escape_batch_name(@batch_name), :wet => @wet) %>' + '&offset=' + offset, function(data) {
       $("#log_box").val($("#log_box").val() + data.content);
       $("#offset").val(data.offset);
       scrollLogBoxDown();
@@ -13,7 +13,7 @@
     logBox.scrollTop(logBox[0].scrollHeight - logBox.height());
   }
   $(function() {
-    setInterval(read_log, 1000);
+    setInterval(read_log, 2000);
   });
 </script>
 <% end %>
