@@ -84,6 +84,10 @@ If [resque](https://github.com/resque/resque) installed in you application, the 
 
 The QUEUE's name will be **"batch_manager".**
 
+### Screenshot
+
+![Screenshot](screenshot.png)
+
 ## Rake Tasks
 
 show all batches
