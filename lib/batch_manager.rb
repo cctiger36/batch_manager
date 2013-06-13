@@ -1,5 +1,6 @@
 require 'rails'
 require 'active_record'
+require 'batch_manager/version'
 require 'batch_manager/engine'
 
 module BatchManager
