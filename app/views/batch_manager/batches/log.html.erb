@@ -22,7 +22,7 @@
   <h2><%= @batch_name %></h2>
 </div>
 
-<%= text_area_tag :log, @content, :id => "log_box", style: "width:100%;height:500px;" %>
+<%= text_area_tag :log, @content, :id => "log_box" %>
 <%= hidden_field_tag :offset, @offset, :id => :offset %>
 
 <div style="margin-top:15px;">

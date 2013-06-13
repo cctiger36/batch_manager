@@ -66,6 +66,14 @@ textarea {
   color: #333;
   padding: 10px;
   box-sizing: border-box;
+  width: 100%;
+  height: 500px;
+}
+
+#editor {
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 500px;
 }
 
 a.cancel {
