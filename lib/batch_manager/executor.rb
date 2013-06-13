@@ -22,13 +22,17 @@ module BatchManager
       def exec_batch_script(batch_file_path, batch_status, is_wet)
         logger = BatchManager::Logger.new(batch_status.name, is_wet)
         write_log_header(is_wet)
+        start_at = Time.now
         begin
           @wet = is_wet
           eval(File.read(batch_file_path))
+          end_at = Time.now
+          logger.info "Completed at: #{end_at.strftime("%Y-%m-%d %H:%M:%S")} (#{(end_at - start_at).to_i}s)"
           batch_status.update_schema if is_wet
         rescue => e
           logger.error e
-          logger.error "Failed."
+          end_at = Time.now
+          logger.info "Failed at: #{end_at.strftime("%Y-%m-%d %H:%M:%S")} (#{(end_at - start_at).to_i}s)"
         ensure
           puts "Log saved at: #{BatchManager.logger.log_file}" if logger.log_file
           logger.close

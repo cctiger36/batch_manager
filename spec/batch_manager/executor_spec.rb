@@ -31,6 +31,10 @@ describe BatchManager::Executor do
         File.read(@log_file_path).include?("This is test_executor").should be_true
       end
 
+      it "should end with completed message" do
+        File.readlines(@log_file_path)[-1].should =~ /Completed at: .+ \(\d+s\)$/
+      end
+
       it "should reset BatchManager.logger after batch completed" do
         BatchManager.logger.should be_an_instance_of(::Logger)
       end
@@ -51,6 +55,20 @@ describe BatchManager::Executor do
 
       it "should include 'WET RUN' in log header" do
         File.read(@log_file_path).include?("WET RUN").should be_true
+      end
+
+      after(:all) { FileUtils.rm(@log_file_path) }
+    end
+
+    context "when raise exception" do
+      before(:all) do
+        @batch_file_path = create_batch_file(@batch_name, created_at: @created_at, code: "raise")
+        BatchManager::Executor.exec(@batch_name)
+        @log_file_path = BatchManager::Logger.log_file_path(@batch_name)
+      end
+
+      it "should end with failed message" do
+        File.readlines(@log_file_path)[-1].should =~ /Failed at: .+ \(\d+s\)$/
       end
 
       after(:all) { FileUtils.rm(@log_file_path) }

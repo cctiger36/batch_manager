@@ -26,6 +26,7 @@ def create_batch_file(batch_name, options = {})
   content << "\n# =times_limit: #{options[:times_limit]}" if options[:times_limit]
   content << "\n# =group_name: #{options[:group_name]}" if options[:group_name]
   content << "\nBatchManager.logger.info 'This is #{batch_name}'"
+  content << "\n#{options[:code]}" if options[:code]
   FileUtils.mkdir_p(File.join(temp_dir, File.dirname(batch_name))) if batch_name.include?("/")
   file_path = File.join(temp_dir, batch_name) + ".rb"
   File.open(file_path, "w") { |f| f << content }
