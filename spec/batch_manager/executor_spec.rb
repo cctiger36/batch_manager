@@ -32,7 +32,8 @@ describe BatchManager::Executor do
       end
 
       it "should end with completed message" do
-        File.readlines(@log_file_path)[-1].should =~ /Completed at: .+ \(\d+s\)$/
+        File.readlines(@log_file_path)[-2].should =~ /Succeeded\.$/
+        File.readlines(@log_file_path)[-1].should =~ /End at: .+ \(\d+s\)$/
       end
 
       it "should reset BatchManager.logger after batch completed" do
@@ -68,7 +69,8 @@ describe BatchManager::Executor do
       end
 
       it "should end with failed message" do
-        File.readlines(@log_file_path)[-1].should =~ /Failed at: .+ \(\d+s\)$/
+        File.readlines(@log_file_path)[-2].should =~ /Failed\.$/
+        File.readlines(@log_file_path)[-1].should =~ /End at: .+ \(\d+s\)$/
       end
 
       after(:all) { FileUtils.rm(@log_file_path) }
