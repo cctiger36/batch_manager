@@ -7,7 +7,6 @@ module BatchManager
     helper_method :escape_batch_name
 
     def index
-      @resque_supported = resque_supported?
       @details = BatchManager::Monitor.details
     end
 
@@ -41,7 +40,11 @@ module BatchManager
     def exec
       if resque_supported?
         Resque.enqueue(BatchManager::ExecBatchWorker, @batch_name, :wet => @wet)
-        redirect_to(log_batches_url(:batch_name => @batch_name, :wet => @wet, :refresh => true))
+        if local_resque_worker?
+          redirect_to(log_batch_url(:batch_name => @batch_name, :wet => @wet, :refresh => true))
+        else
+          redirect_to(batches_url, :notice => "(#{@batch_name}) Task added to the remote resque worker.")
+        end
       else
         BatchManager::Executor.exec(@batch_name, :wet => @wet)
         redirect_to(batches_url)
@@ -79,7 +82,7 @@ module BatchManager
     end
 
     def log_file
-      20.times do
+      5.times do
         begin
           @log_file ||= File.open(BatchManager::Logger.log_file_path(@batch_name, @wet), 'r')
           return @log_file

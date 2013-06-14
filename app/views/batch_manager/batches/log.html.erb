@@ -2,7 +2,7 @@
 <script>
   function read_log() {
     offset = $("#offset").val();
-    $.get('<%= async_read_log_batch_url(escape_batch_name(@batch_name), :wet => @wet) %>' + '&offset=' + offset, function(data) {
+    $.get('<%= async_read_log_batch_url(escape_batch_name(@batch_name), :wet => @wet, 1 => 1) %>' + '&offset=' + offset, function(data) {
       $("#log_box").val($("#log_box").val() + data.content);
       $("#offset").val(data.offset);
       scrollLogBoxDown();

@@ -1,8 +1,12 @@
 <div class="group title">
   <h2 style="float:left;">Batches</h2>
   <div style="float:right;text-align:right;">
-    <% if @resque_supported %>
-      <div class="label info">Resque worker found</div>
+    <% if resque_supported? %>
+      <% if local_resque_worker? %>
+        <div class="label info">Resque worker found</div>
+      <% else %>
+        <div class="label info">Resque worker found on <%= resque_worker_hostname %></div>
+      <% end %>
     <% else %>
       <div class="label warn">Resque or Resque worker not found</div>
     <% end %>
