@@ -10,11 +10,20 @@
 
   <header>
     <div class="inner">
-      <h1>BatchManager</h1>
+      <h1><%= link_to "BatchManager", batches_url %></h1>
+      <div class="new_link"><%= link_to "NEW BATCH", new_batch_url %></div>
     </div>
   </header>
 
   <div id="wrapper">
+    <div class="group">
+      <% if flash[:notice] %>
+        <div class="alert notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="alert error"><%= flash[:error] %></div>
+      <% end %>
+    </div>
     <%= yield %>
   </div>
 

@@ -8,14 +8,6 @@
     <% end %>
   </div>
 </div>
-<div class="group">
-  <% if flash[:notice] %>
-    <div class="alert notice"><%= flash[:notice] %></div>
-  <% end %>
-  <% if flash[:error] %>
-    <div class="alert error"><%= flash[:error] %></div>
-  <% end %>
-</div>
 <table>
   <tr>
     <th>Managed?</th>
@@ -31,7 +23,7 @@
     <tr>
       <td><%= status.managed?? "Yes" : "" %></td>
       <td><%= status.name %></td>
-      <td style="text-align:right;"><%= schema_batch.try(:ran_times).to_i %>/<%= status.times_limit || 0 %></td>
+      <td style="text-align:right;"><%= schema_batch.try(:ran_times).to_i %><span class="divider">/</span><%= status.times_limit || 0 %></td>
       <td style="text-align:center;">
         <% if last_ran_at = schema_batch.try(:last_ran_at) %>
           <%= last_ran_at.strftime('%Y-%m-%d %H:%M:%S') %>

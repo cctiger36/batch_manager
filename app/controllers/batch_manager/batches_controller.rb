@@ -1,12 +1,32 @@
+require 'generators/batch/batch_generator'
+
 module BatchManager
   class BatchesController < ApplicationController
     include BatchManager::Utils
-    before_filter :retain_batch_params, :except => [:index]
+    before_filter :retain_batch_params, :except => [:index, :new, :create]
     helper_method :escape_batch_name
 
     def index
       @resque_supported = resque_supported?
       @details = BatchManager::Monitor.details
+    end
+
+    def new
+      template = File.read(File.join(Rails::Generators::BatchGenerator.source_root, "batch.rb"))
+      @content = ERB.new(template).result(binding)
+    end
+
+    def create
+      batch_name = params[:batch_name]
+      if batch_name.blank?
+        flash[:error] = "Please input the batch name."
+        redirect_to(new_batch_url) and return 
+      end
+      file_path = File.join(BatchManager.batch_dir, batch_name)
+      file_path << ".rb" unless file_path.end_with?(".rb")
+      FileUtils.mkdir_p(File.dirname(file_path)) if batch_name.include?("/")
+      File.open(file_path, "w") { |f| f << params[:content] }
+      redirect_to(batches_url, :notice => "#{batch_name} created.")
     end
 
     def edit

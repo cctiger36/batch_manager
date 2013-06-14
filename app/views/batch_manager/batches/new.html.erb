@@ -1,0 +1,9 @@
+<%= javascript_include_tag "batch_manager/editor" %>
+
+<%= form_tag batches_url do %>
+  <div class="group title">
+    <h2 style="float:left;">New Batch</h2>
+    <div class="new_batch" style="float:left;margin-left:25px;"><%= text_field_tag :batch_name, nil, :placeholder => "Batch name here..." %></div>
+  </div>
+  <%= render "form_content" %>
+<% end %>

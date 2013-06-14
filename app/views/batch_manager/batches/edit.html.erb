@@ -6,12 +6,5 @@
 </div>
 
 <%= form_tag batch_url(escape_batch_name(@batch_name)), :method => :put do %>
-  <%= hidden_field_tag :content, @content, :id => "content" %>
-  <div id="editor"><%= @content %></div>
-  <div class="group" style="margin-top:15px;">
-    <div style="float:left;"><%= submit_tag "Save", :class => "btn info large" %></div>
-    <div style="margin-left:15px;float:left;padding-top:6px;">
-      <%= link_to "Cancel", batches_url, :class => "cancel" %>
-    </div>
-  </div>
+  <%= render "form_content" %>
 <% end %>
