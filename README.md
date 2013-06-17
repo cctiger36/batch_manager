@@ -80,7 +80,7 @@ Mount the web interface in the routes file.
 
 You can also use web interface to execute batches.
 
-If [resque](https://github.com/resque/resque) installed in you application, the batch script can be executed asynchronous. And the log can be checked on real time in the brower.
+If [resque](https://github.com/resque/resque) installed in you application and the resque worker started, the batch script can be executed asynchronous through the worker. And the log can be checked on real time in the brower. Otherwise the batch script will be executed synchronous.
 
 The QUEUE's name will be **"batch_manager".**
 
