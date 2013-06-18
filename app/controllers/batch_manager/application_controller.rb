@@ -8,7 +8,7 @@ module BatchManager
       begin
         require 'resque'
         defined?(Resque) && resque_worker
-      rescue
+      rescue LoadError
         false
       end
     end

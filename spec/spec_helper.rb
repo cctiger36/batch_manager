@@ -7,10 +7,7 @@ require 'batch_manager'
 require 'coveralls'
 Coveralls.wear!
 
-ActiveRecord::Base.establish_connection(
-  :adapter => 'sqlite3',
-  :database => File.expand_path(File.dirname(__FILE__) + '/batch_manager_test.sqlite3')
-)
+ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
 
 load(File.dirname(__FILE__) + '/schema.rb')
 
