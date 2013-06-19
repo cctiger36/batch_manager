@@ -8,7 +8,7 @@ module Rails
       desc "Generates batch file"
 
       def self.orm
-        Rails::Generators.options[:rails][:orm]
+        Rails::Generators.options[:rails][:orm] || :active_record
       end
 
       def self.source_root
