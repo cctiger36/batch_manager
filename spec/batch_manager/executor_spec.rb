@@ -23,6 +23,14 @@ describe BatchManager::Executor do
         File.exist?(@log_file_path).should be_true
       end
 
+      it "should make log directory with mode 775" do
+        (File.stat(File.dirname(@log_file_path)).mode & 0000777).should == 0775
+      end
+
+      it "should create log file with mode 664" do
+        (File.stat(@log_file_path).mode & 0000777).should == 0664
+      end
+
       it "should include 'DRY RUN' in log header" do
         File.read(@log_file_path).include?("DRY RUN").should be_true
       end

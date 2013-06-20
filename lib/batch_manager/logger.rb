@@ -25,7 +25,11 @@ module BatchManager
 
     def prepare_log_file(batch_name, is_wet)
       file_path = self.class.log_file_path(batch_name, is_wet)
-      FileUtils.mkdir_p(File.dirname(file_path)) unless File.exist?(file_path)
+      unless File.exist?(file_path)
+        FileUtils.mkdir_p(File.dirname(file_path), :mode => 0775)
+        FileUtils.touch(file_path)
+        FileUtils.chmod(0664, file_path)
+      end
       file_path
     end
 
