@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cctiger36/batch_manager.png?branch=master)](https://travis-ci.org/cctiger36/batch_manager) [![Gem Version](https://badge.fury.io/rb/batch_manager.png)](http://badge.fury.io/rb/batch_manager) [![Coverage Status](https://coveralls.io/repos/cctiger36/batch_manager/badge.png?branch=master)](https://coveralls.io/r/cctiger36/batch_manager?branch=master) [![Code Climate](https://codeclimate.com/github/cctiger36/batch_manager.png)](https://codeclimate.com/github/cctiger36/batch_manager)
 
-A rails plugin to manage batch scripts similar to migrations.
+A rails plugin to manage batch scripts. Provide web interface to create, edit and execute batch scripts simply. Automatically save the log to file.
 
 ## Installation
 
@@ -46,7 +46,6 @@ The generated batch files will have the header like:
     # =Batch Manager=
     # =created_at:  2013-05-24 13:10:25
     # =times_limit: 1
-    # =group_name:  GroupName
 
 Add the "=Batch Manager=" to tell BatchManager to manage this batch file.
 
@@ -84,7 +83,7 @@ You can also use web interface to execute batches.
 
 If [resque](https://github.com/resque/resque) installed in you application and the resque worker started, the batch script can be executed asynchronous through the worker. And the log can be checked on real time in the brower. Otherwise the batch script will be executed synchronous.
 
-The QUEUE's name will be **"batch_manager".**
+The QUEUE's name will be *"batch_manager".*
 
 ### Screenshot
 
