@@ -35,7 +35,9 @@ You can change the default configuration in config/application.rb
 
 This will generate the file 'test.rb' in the configured batch_dir with default template.
 
-You can find the template in lib/generators/batch/templates, and modify it for yourself.
+### Custom Template
+
+You can simply override the default template by making a template file with the name 'batch.rb' inside lib/templates/rails/batch.
 
 ## Batch Header
 
