@@ -1,6 +1,6 @@
 # BatchManager
 
-[![Build Status](https://travis-ci.org/cctiger36/batch_manager.png?branch=master)](https://travis-ci.org/cctiger36/batch_manager) [![Gem Version](https://badge.fury.io/rb/batch_manager.png)](http://badge.fury.io/rb/batch_manager) [![Coverage Status](https://coveralls.io/repos/cctiger36/batch_manager/badge.png?branch=master)](https://coveralls.io/r/cctiger36/batch_manager?branch=master) [![Code Climate](https://codeclimate.com/github/cctiger36/batch_manager.png)](https://codeclimate.com/github/cctiger36/batch_manager)
+[![Build Status](https://travis-ci.org/cctiger36/batch_manager.png?branch=master)](https://travis-ci.org/cctiger36/batch_manager) [![Gem Version](https://badge.fury.io/rb/batch_manager.png)](http://badge.fury.io/rb/batch_manager) [![Coverage Status](https://coveralls.io/repos/cctiger36/batch_manager/badge.png?branch=master)](https://coveralls.io/r/cctiger36/batch_manager?branch=master) [![Code Climate](https://codeclimate.com/github/cctiger36/batch_manager.png)](https://codeclimate.com/github/cctiger36/batch_manager) [![Dependency Status](https://gemnasium.com/cctiger36/batch_manager.png)](https://gemnasium.com/cctiger36/batch_manager)
 
 A rails plugin to manage batch scripts. Provide web interface to create, edit and execute batch scripts simply. Automatically save the log to file.
 
