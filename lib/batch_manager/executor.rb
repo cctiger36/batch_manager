@@ -9,7 +9,7 @@ module BatchManager
           @batch_status = BatchManager::BatchStatus.new(@batch_file_path)
           @wet = options[:wet]
           if options[:force] || !@wet || @batch_status.can_run?
-            record_run_duration { exec_batch_script }
+            logging_run_duration { exec_batch_script }
           else
             raise "Cannot run this batch."
           end
@@ -20,7 +20,7 @@ module BatchManager
 
       protected
 
-      def record_run_duration
+      def logging_run_duration
         @logger = BatchManager::Logger.new(@batch_status.name, @wet)
         start_at = Time.now
         yield
@@ -34,6 +34,8 @@ module BatchManager
         eval(File.read(@batch_file_path), nil, @batch_file_path)
         @logger.info "Succeeded."
         @batch_status.update_schema if @wet
+      rescue => e
+        @logger.error e
       ensure
         puts "Log saved at: #{@logger.log_file}" if @logger.log_file
       end
