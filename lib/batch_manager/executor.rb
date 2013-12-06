@@ -31,12 +31,9 @@ module BatchManager
 
       def exec_batch_script
         write_log_header
-        eval(File.read(@batch_file_path))
+        eval(File.read(@batch_file_path), nil, @batch_file_path)
         @logger.info "Succeeded."
         @batch_status.update_schema if @wet
-      rescue => e
-        @logger.error e
-        @logger.info "Failed."
       ensure
         puts "Log saved at: #{@logger.log_file}" if @logger.log_file
       end
