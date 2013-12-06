@@ -76,8 +76,13 @@ describe BatchManager::Executor do
         @log_file_path = BatchManager::Logger.log_file_path(@batch_name)
       end
 
+      it "should show the exception detail" do
+        log_content = File.read(@log_file_path)
+        log_content.should include "ERROR"
+        log_content.should include "#{@batch_file_path}:"
+      end
+
       it "should end with failed message" do
-        File.readlines(@log_file_path)[-2].should =~ /Failed\.$/
         File.readlines(@log_file_path)[-1].should =~ /End at: .+ \(\d+s\)$/
       end
 
