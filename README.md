@@ -57,9 +57,20 @@ You can also add these headers to the existing batch files.
 
 Please use this command instead of 'rails runner' to run batch scripts.
 
-    option:
-      -f, --force
-      -w, --wet
+    options:
+      -f, --force                      Force to run
+      -w, --wet                        Wet run
+      -d, --daemon COMMAND             Daemon mode
+
+### Daemon mode
+
+Use `-d` option to run batch as daemon.
+
+    # start daemon
+    bundle exec bm_exec -d start BATCH_FILE
+
+    # stop daemon
+    bundle exec bm_exec -d stop BATCH_FILE
 
 ## Logger
 
