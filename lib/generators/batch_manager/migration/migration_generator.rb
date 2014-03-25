@@ -31,7 +31,7 @@ module BatchManager
 
     def create_migration_file
       if self.class.orm_has_migration?
-        migration_template 'migration.rb', 'db/migrate/batch_manager_migration'
+        migration_template 'migration.rb', 'db/migrate/batch_manager_migration.rb'
       end
     end
   end
