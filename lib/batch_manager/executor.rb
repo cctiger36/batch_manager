@@ -8,8 +8,9 @@ module BatchManager
         if File.exist?(@batch_file_path)
           @batch_status = BatchManager::BatchStatus.new(@batch_file_path)
           @wet = options[:wet]
+          @disable_stdout = options[:daemon]
           if options[:force] || !@wet || @batch_status.can_run?
-            logging_run_duration { exec_batch_script }
+            log_run_duration { exec_batch_script }
           else
             raise "Cannot run this batch."
           end
@@ -20,8 +21,8 @@ module BatchManager
 
       protected
 
-      def logging_run_duration
-        @logger = BatchManager::Logger.new(@batch_status.name, @wet)
+      def log_run_duration
+        @logger = BatchManager::Logger.new(@batch_status.name, @wet, @disable_stdout)
         start_at = Time.now
         yield
         end_at = Time.now

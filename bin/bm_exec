@@ -8,16 +8,20 @@ require 'batch_manager'
 options = {}
 batch_file = nil
 ARGV.clone.options do |opts|
-  opts.banner = "Usage: batch [options] BATCH_FILE"
+  opts.banner = "Usage: bm_exec [options] BATCH_FILE"
   opts.on("-f", "--force", "Force to run") { options[:force] = true }
   opts.on("-w", "--wet", "Wet run") { options[:wet] = true }
+  opts.on("-d", "--daemon COMMAND", "Daemon mode") { |cmd| options[:daemon] = cmd }
   opts.order! { |o| batch_file ||= o } rescue retry
 end
 ARGV.delete(batch_file)
 
 APP_PATH = File.join('.', 'config', 'application')
 require APP_PATH
-#ENV["RAILS_ENV"] = options[:environment] || "development"
 Rails.application.require_environment!
 
-BatchManager::Executor.exec(batch_file, options)
+if options[:daemon]
+  BatchManager::Daemon.spawn(options[:daemon], batch_file, options)
+else
+  BatchManager::Executor.exec(batch_file, options)
+end

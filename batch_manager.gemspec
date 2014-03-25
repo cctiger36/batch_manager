@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">=3.1.0"
   s.add_dependency "log4r"
+  s.add_dependency "daemon-spawn", "~> 0.4.2"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

@@ -13,9 +13,9 @@ module BatchManager
       end
     end
 
-    def initialize(batch_name, is_wet)
+    def initialize(batch_name, is_wet, disable_stdout = false)
       @logger = Log4r::Logger.new(batch_name)
-      @logger.outputters << Log4r::Outputter.stdout
+      @logger.outputters << Log4r::Outputter.stdout unless disable_stdout
       if BatchManager.save_log?
         @log_file = prepare_log_file(batch_name, is_wet)
         @logger.outputters << Log4r::FileOutputter.new(File.basename(@log_file, ".log"), :filename => @log_file)

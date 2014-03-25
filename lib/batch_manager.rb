@@ -37,3 +37,4 @@ require 'batch_manager/batch_status'
 require 'batch_manager/executor'
 require 'batch_manager/monitor'
 require "batch_manager/logger"
+require "batch_manager/daemon"

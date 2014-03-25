@@ -18,7 +18,7 @@ describe BatchManager::Executor do
         @log_file_path = BatchManager::Logger.log_file_path(@batch_name)
       end
 
-      it "should place logfile in the configured log directory" do
+      it "should place log file in the configured log directory" do
         @log_file_path.start_with?(Rails.application.config.batch_manager.log_dir).should be_true
         File.exist?(@log_file_path).should be_true
       end
