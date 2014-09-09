@@ -41,7 +41,7 @@ module BatchManager
       if resque_supported?
         Resque.enqueue(BatchManager::ExecBatchWorker, @batch_name, :wet => @wet)
         if local_resque_worker?
-          redirect_to(log_batch_url(:batch_name => @batch_name, :wet => @wet, :refresh => true))
+          redirect_to(batches_url, :notice => "(#{@batch_name}) Task added to the remote resque worker.")
         else
           redirect_to(batches_url, :notice => "(#{@batch_name}) Task added to the remote resque worker.")
         end
